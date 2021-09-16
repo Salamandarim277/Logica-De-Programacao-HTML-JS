@@ -1,0 +1,40 @@
+<meta charset="UTF-8">
+
+<h1>Receitas do Yan</h1>
+<br>
+<br>
+<script>
+
+	function verificaRepetidos(quantia) {
+
+		var ingredientes = [];
+		var contador = 1;
+
+		while(contador <= quantia) {
+			var achou = false;
+
+		    var ingrediente = prompt("Informe o ingrediente " + contador);
+
+		    for(posicao = 0; posicao < ingredientes.length; posicao++) {
+		    	if(ingredientes[posicao] == ingrediente) {
+		    		achou = true;
+		    		break;
+		    	}
+		    }
+
+			if(achou == false) {
+				ingredientes.push(ingrediente);
+				contador++;
+			}		
+		}
+
+		return ingredientes;
+	}
+
+
+    var ingredientes = verificaRepetidos(parseInt(prompt("Quantos ingredientes você vai adicionar?")));
+    
+    
+    document.write("<p5> " + ingredientes + " </p5>") 
+    console.log(ingredientes);
+</script>

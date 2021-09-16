@@ -1,0 +1,83 @@
+<canvas width="600" height="400"></canvas>
+<br>
+Select Color <input type="color">
+
+<script>
+    
+    alert('Hello, Welcome to Sala Paint :D  creator:Salamandarim277')
+    
+    var cor = document.querySelector('input')
+    var tela = document.querySelector('canvas');
+    var pincel = tela.getContext('2d');
+    pincel.fillStyle = 'grey';
+    pincel.fillRect(0, 0, 600, 400);
+    
+    var raio = 10;
+    var desenha = false;
+
+
+    function desenhaCirculo(evento) {
+
+        var mudou = false;
+
+        if(evento.shiftKey && evento.altKey) {
+            alert('Just press one key at a time, please!');
+            mudou = true;
+        }
+
+        else if(evento.shiftKey && raio + 10 <= 40){
+
+            raio = raio + 10;
+            alert('circle size increased in 10 to ' + raio);
+            mudou = true;
+        } 
+
+        else if(evento.altKey && raio - 10 >= 10) {
+
+            raio = raio - 10;
+            alert('circle size decreased in 10 to ' + raio);
+            mudou = true;
+        }           
+
+        if(mudou == false) {
+
+            var x = evento.pageX - tela.offsetLeft;
+            var y = evento.pageY - tela.offsetTop;
+            pincel.fillStyle = cor.value;
+            pincel.beginPath();
+            pincel.arc(x, y, raio, 0, 2 * 3.14);
+            pincel.fill();
+            console.log(x + ',' + y);
+        }
+    }   
+
+    function pintaComCirculo(evento) {
+        
+        if(desenha) {
+
+            var x = evento.pageX - tela.offsetLeft;
+            var y = evento.pageY - tela.offsetTop;
+            pincel.fillStyle = cor.value
+            pincel.beginPath();
+            pincel.arc(x, y, raio, 0, 2 * 3.14);
+            pincel.fill();
+            console.log(x + ',' + y);
+        }
+     }
+
+    tela.onclick = desenhaCirculo;
+    
+    function habilitaDesenha() {
+        desenha = true;
+    }
+
+    function desabilitaDesenha() {
+        desenha = false;
+    }
+
+    tela.onmousedown = habilitaDesenha;
+    tela.onmouseup = desabilitaDesenha;
+    tela.onmousemove = pintaComCirculo;
+
+
+</script>
